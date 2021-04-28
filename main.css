@@ -1,1 +1,10 @@
-/* No CSS *//*# sourceMappingURL=main.css.map */
+#view {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  width: 400px;
+  border: 2px solid black;
+}
+/*# sourceMappingURL=main.css.map */
