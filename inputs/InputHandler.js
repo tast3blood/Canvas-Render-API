@@ -1,4 +1,4 @@
-var InputHandler = inherits(function() { }, {
+export var InputHandler =  {
     'Keys': {
       'BACKSPACE': 8,
       'COMMA': 188,
@@ -24,9 +24,9 @@ var InputHandler = inherits(function() { }, {
       'UP': 38
     },
     '_keysDown': {},
-    'constructor': function() {
-      window.addEventListener('keydown', _.bind(this._onkeydown, this));
-      window.addEventListener('keyup', _.bind(this._onkeyup, this));
+    'init': function() {
+      window.addEventListener("keydown", this._onkeydown.bind(this));
+      window.addEventListener('keyup', this._onkeyup.bind(this));
     },
     '_onkeydown': function(ev) {
       this._keysDown[ev.which] = true;
@@ -35,8 +35,10 @@ var InputHandler = inherits(function() { }, {
       this._keysDown[ev.which] = false;
     },
     'keyDown': function(key) {
+      
       return !!this._keysDown[key];
     }
-  });
+  };
+  InputHandler.init()
 
   //Source: https://davidthomasbernal.com/blog/2012/07/21/handling-input-in-a-js-game

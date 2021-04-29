@@ -1,14 +1,11 @@
+import {InputHandler} from "./inputs/inputHandler.js";
+
+console.log(InputHandler)
+
 var view = document.getElementById('view');
 var ctx = view.getContext('2d');
 view.width = 800;
 view.height = 500;
-
-
-
-
-
-
-const keys = [];
 
 const player = {
     x: 200,
@@ -30,34 +27,30 @@ function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH) {
     ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
 }
 
-window.addEventListener("keydown", function(e) {
-    keys[e.keyCode] = true;
-    console.log(e.keyCode);
-    console.log(e.code);
+window.addEventListener("keydown", function(e) {    
     player.moving = true;
 });
 window.addEventListener("keyup", function(e) {
-    delete keys[e.keyCode];
     player.moving = false;
 });
 
 function movePlayer() {
-    if (keys[38] && player.y > 100) {
+    if (InputHandler.keyDown(InputHandler.Keys.UP) && player.y > 100) {
         player.y -= player.speed;
         player.frameY = 3;
         player.moving = true;
     }
-    if (keys[37] && player.x > 0) {
+    if (InputHandler.keyDown(InputHandler.Keys.LEFT) && player.x > 0) {
         player.x -= player.speed;
         player.frameY = 1;
         player.moving = true;
     }
-    if (keys[40] && player.y < view.height - player.height) {
+    if (InputHandler.keyDown(InputHandler.Keys.DOWN) && player.y < view.height - player.height) {
         player.y += player.speed;
         player.frameY = 0;
         player.moving = true;
     }
-    if (keys[39] && player.x < view.width - player.width) {
+    if (InputHandler.keyDown(InputHandler.Keys.RIGHT) && player.x < view.width - player.width) {
         player.x += player.speed;
         player.frameY = 2;
         player.moving = true;
@@ -91,4 +84,6 @@ function animate() {
     }
 }
 startAnimating(15); 
+
+
 
