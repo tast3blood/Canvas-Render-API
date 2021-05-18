@@ -1,4 +1,4 @@
-export var InputHandler =  {
+var InputHandler =  {
     'Keys': {
       'BACKSPACE': 8,
       'COMMA': 188,
@@ -39,6 +39,7 @@ export var InputHandler =  {
       return !!this._keysDown[key];
     }
   };
-  InputHandler.init()
+  InputHandler.init();
 
+  export default InputHandler;
   //Source: https://davidthomasbernal.com/blog/2012/07/21/handling-input-in-a-js-game

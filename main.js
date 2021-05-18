@@ -1,4 +1,5 @@
-import {InputHandler} from "./inputs/inputHandler.js";
+import InputHandler from "./packages/inputs/inputHandler.js";
+import Sprite from "./packages/sprite/sprite.js"
 
 console.log(InputHandler)
 
@@ -10,18 +11,21 @@ view.height = 500;
 const player = {
     x: 200,
     y: 300,
-    width: 40,
-    height: 72,
+    sprite: new Sprite("chewie", 40, 72, "assets/chewie.png", 2),
+     
+    // width: 40,
+    // height: 72,
     frameX: 0,
     frameY: 0,
     speed: 9,
     moving: false
 };
-
-const playerSprite = new Image();
-playerSprite.src = "assets/chewie.png"; /* check out this character and more at http://untamed.wild-refuge.net/rmxpresources.php?characters */
+console.log(player.sprite)
+// const playerSprite = new Image();
+// playerSprite.src = "assets/chewie.png"; /* check out this character and more at http://untamed.wild-refuge.net/rmxpresources.php?characters */
 const background = new Image();
 background.src = "assets/background.png";
+
 
 function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH) {
     ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
@@ -45,12 +49,12 @@ function movePlayer() {
         player.frameY = 1;
         player.moving = true;
     }
-    if (InputHandler.keyDown(InputHandler.Keys.DOWN) && player.y < view.height - player.height) {
+    if (InputHandler.keyDown(InputHandler.Keys.DOWN) && player.y < view.height - player.sprite.height) {
         player.y += player.speed;
         player.frameY = 0;
         player.moving = true;
     }
-    if (InputHandler.keyDown(InputHandler.Keys.RIGHT) && player.x < view.width - player.width) {
+    if (InputHandler.keyDown(InputHandler.Keys.RIGHT) && player.x < view.width - player.sprite.width) {
         player.x += player.speed;
         player.frameY = 2;
         player.moving = true;
@@ -78,7 +82,8 @@ function animate() {
         then = now - (elapsed % fpsInterval);
         ctx.clearRect(0, 0, view.width, view.height);
         ctx.drawImage(background, 0, 0, view.width, view.height);
-        drawSprite(playerSprite, player.width * player.frameX, player.height * player.frameY, player.width, player.height, player.x, player.y, player.width, player.height);
+        //drawSprite(player.sprite.curSprite, player.sprite.width * player.frameX, player.sprite.height * player.frameY, player.sprite.width, player.sprite.height, player.x, player.y, player.sprite.width, player.sprite.height);
+        player.sprite.Render(2, player.x, player.y);
         movePlayer();
         handlePlayerFrame();
     }
